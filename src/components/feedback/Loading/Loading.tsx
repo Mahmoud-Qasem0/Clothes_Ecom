@@ -1,6 +1,8 @@
+import { TLoading } from "@customTypes/shared";
 import React, { JSX, ReactNode } from "react";
+
 type LoadingProps = {
-  status: "idle" | "pending" | "succeeded" | "failed";
+  status: TLoading;
   error: string | null;
   children: ReactNode;
 };

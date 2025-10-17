@@ -1,30 +1,31 @@
-import { TCategory } from "@customTypes/category";
 import React, { JSX } from "react";
 import { Col, Row } from "react-bootstrap";
 
-type GridListProps = {
-  record: TCategory[];
-  renderItems: (record: TCategory) => React.ReactNode;
+type GridListProps<T> = {
+  record: T[];
+  renderItems: (record: T) => React.ReactNode;
 };
 
-const GridList: React.FC<GridListProps> = ({
+type HasId = { id?: number }
+
+const GridList = <T extends HasId>({
   record,
   renderItems,
-}): JSX.Element => {
-  const categoriesList =
+}: GridListProps<T>): JSX.Element => {
+  const itemsList =
     record.length > 0
-      ? record.map((cat: TCategory) => (
+      ? record.map((item) => (
           <Col
-            key={cat.id}
+            key={item.id}
             xs={6}
             md={3}
             className="d-flex justify-content-center mb-5 mt-2">
-            {renderItems(cat)}
+            {renderItems(item)}
           </Col>
         ))
       : "There are no Categories";
 
-  return <Row>{categoriesList}</Row>;
+  return <Row>{itemsList}</Row>;
 };
 
 export default GridList;
